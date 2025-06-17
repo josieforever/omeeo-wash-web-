@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'
     show FontAwesomeIcons;
 import 'package:omeeoweb/widgets/colors.dart';
+import '../responsive.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -117,6 +118,7 @@ class _FeatureCardState extends State<FeatureCard> {
 
   @override
   Widget build(BuildContext context) {
+    final cardWidth = Responsive.isMobile(context) ? double.infinity : 290.0;
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -125,7 +127,7 @@ class _FeatureCardState extends State<FeatureCard> {
         duration: const Duration(milliseconds: 200),
         child: Container(
           height: 220,
-          width: 290,
+          width: cardWidth,
           padding: const EdgeInsets.all(16),
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
           decoration: BoxDecoration(
@@ -183,6 +185,7 @@ class _ServiceCardState extends State<ServiceCard> {
 
   @override
   Widget build(BuildContext context) {
+    final cardWidth = Responsive.isMobile(context) ? double.infinity : 350.0;
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -190,7 +193,7 @@ class _ServiceCardState extends State<ServiceCard> {
         scale: _isHovered ? 1.05 : 1.0,
         duration: const Duration(milliseconds: 200),
         child: Container(
-          width: 350,
+          width: cardWidth,
           padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
           margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
           decoration: BoxDecoration(
@@ -284,8 +287,9 @@ class PrincipleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final horizontal = Responsive.isMobile(context) ? 20.0 : 50.0;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50),
+      padding: EdgeInsets.symmetric(horizontal: horizontal),
       child: Column(
         children: [
           const SizedBox(height: 20),

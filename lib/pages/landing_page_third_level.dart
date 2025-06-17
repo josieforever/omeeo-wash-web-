@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:omeeoweb/widgets/colors.dart';
 import 'package:omeeoweb/widgets/cutsom_widgets.dart';
+import '../responsive.dart';
 
 class LandingPageThirdLevel extends StatelessWidget {
   const LandingPageThirdLevel({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
     return Container(
       color: const Color.fromARGB(6, 62, 0, 161),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
@@ -21,7 +23,7 @@ class LandingPageThirdLevel extends StatelessWidget {
                 CustomText(
                   text: 'Why Choose OMEEO wash?',
                   textColor: AppColors.primaryPurple,
-                  textSize: 50,
+                  textSize: isMobile ? 32 : 50,
                   textWeight: FontWeight.w800,
                 ),
                 const SizedBox(height: 10),
@@ -29,7 +31,7 @@ class LandingPageThirdLevel extends StatelessWidget {
                   text:
                       'We revolutionize car care by bringing professional detailing services directly to your doorstep. No more waiting in line or driving to car washes - we handle everything while you focus on what matters most.',
                   textColor: AppColors.textSecondary,
-                  textSize: 21,
+                  textSize: isMobile ? 16 : 21,
                   textWeight: FontWeight.w500,
                 ),
                 const SizedBox(height: 30),
@@ -94,13 +96,13 @@ class LandingPageThirdLevel extends StatelessWidget {
                         CustomText(
                           text: '100+',
                           textColor: AppColors.primaryPurple,
-                          textSize: 35,
+                          textSize: isMobile ? 28 : 35,
                           textWeight: FontWeight.w700,
                         ),
                         CustomText(
                           text: 'Happy Customers',
                           textColor: AppColors.textSecondary,
-                          textSize: 18,
+                          textSize: isMobile ? 14 : 18,
                         ),
                       ],
                     ),
@@ -123,13 +125,13 @@ class LandingPageThirdLevel extends StatelessWidget {
                         CustomText(
                           text: '5+',
                           textColor: AppColors.white,
-                          textSize: 35,
+                          textSize: isMobile ? 28 : 35,
                           textWeight: FontWeight.w700,
                         ),
                         CustomText(
                           text: 'Years Experience',
                           textColor: AppColors.white,
-                          textSize: 18,
+                          textSize: isMobile ? 14 : 18,
                         ),
                       ],
                     ),
@@ -147,6 +149,7 @@ class LandingPageThirdLevel extends StatelessWidget {
     required String title,
     required String description,
   }) {
+    final isMobile = Responsive.isMobile(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -167,13 +170,13 @@ class LandingPageThirdLevel extends StatelessWidget {
               CustomText(
                 text: title,
                 textColor: AppColors.primaryPurple,
-                textSize: 25,
+                textSize: isMobile ? 20 : 25,
                 textWeight: FontWeight.w600,
               ),
               CustomText(
                 text: description,
                 textColor: AppColors.textSecondary,
-                textSize: 18,
+                textSize: isMobile ? 14 : 18,
               ),
             ],
           ),
