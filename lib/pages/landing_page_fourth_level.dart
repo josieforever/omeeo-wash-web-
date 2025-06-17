@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:omeeoweb/widgets/colors.dart';
 import 'package:omeeoweb/widgets/cutsom_widgets.dart';
+import '../responsive.dart';
 
 class LandingPageFourthLevel extends StatelessWidget {
   const LandingPageFourthLevel({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
     return Container(
       color: AppColors.accentPurple,
       child: Column(
@@ -18,7 +20,7 @@ class LandingPageFourthLevel extends StatelessWidget {
           CustomText(
             text: 'Ready to Book with OMEEO wash?',
             textColor: AppColors.primaryPurple,
-            textSize: 65,
+            textSize: isMobile ? 40 : 65,
             textWeight: FontWeight.w800,
             textAlign: TextAlign.center,
           ),
@@ -27,7 +29,7 @@ class LandingPageFourthLevel extends StatelessWidget {
             text:
                 'Get in touch with us today to schedule your mobile car wash and detailing service',
             textColor: Colors.black54,
-            textSize: 25,
+            textSize: isMobile ? 16 : 25,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
@@ -137,7 +139,7 @@ class ContactCard extends StatelessWidget {
               text: CustomText(
                 text: 'Call Now to Book',
                 textColor: AppColors.white,
-                textSize: 20,
+                textSize: isMobile ? 16 : 20,
                 textWeight: FontWeight.w600,
               ),
               onPressed: () {},
@@ -199,7 +201,7 @@ class _QuoteFormState extends State<QuoteForm> {
             CustomText(
               text: 'Request a Quote',
               textColor: AppColors.primaryPurple,
-              textSize: 30,
+              textSize: isMobile ? 24 : 30,
               textWeight: FontWeight.w600,
             ),
             const SizedBox(height: 20),
@@ -280,11 +282,11 @@ class _QuoteFormState extends State<QuoteForm> {
             !isLoading
                 ? HoverButton(
                   text: CustomText(
-                    text: 'Request Quote',
-                    textColor: AppColors.white,
-                    textSize: 20,
-                    textWeight: FontWeight.w600,
-                  ),
+                  text: 'Request Quote',
+                  textColor: AppColors.white,
+                  textSize: isMobile ? 16 : 20,
+                  textWeight: FontWeight.w600,
+                ),
                   onPressed: () async {
                     setState(() {
                       isLoading = true;
@@ -353,7 +355,7 @@ Future<int> sendQuoteEmail({
         content: Center(
           child: CustomText(
             text: 'Please complete the form.',
-            textSize: 20,
+            textSize: Responsive.isMobile(context) ? 16 : 20,
             textColor: AppColors.white,
           ),
         ),
@@ -393,7 +395,7 @@ Future<int> sendQuoteEmail({
         content: Center(
           child: CustomText(
             text: 'Message sent successfully!',
-            textSize: 20,
+            textSize: Responsive.isMobile(context) ? 16 : 20,
             textColor: AppColors.white,
           ),
         ),
@@ -410,7 +412,7 @@ Future<int> sendQuoteEmail({
         content: Center(
           child: CustomText(
             text: 'Failed to send message. Please try again.',
-            textSize: 20,
+            textSize: Responsive.isMobile(context) ? 16 : 20,
             textColor: AppColors.white,
           ),
         ),

@@ -3,19 +3,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart'
     show FontAwesomeIcons;
 import 'package:omeeoweb/widgets/colors.dart';
 import 'package:omeeoweb/widgets/cutsom_widgets.dart';
+import '../responsive.dart';
 
 class LandingPageSecondLevel extends StatelessWidget {
   const LandingPageSecondLevel({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
     return Container(
       child: Column(
         children: [
           const SizedBox(height: 20),
           CustomText(
             text: 'Our Services',
-            textSize: 60,
+            textSize: isMobile ? 40 : 60,
             textColor: AppColors.primaryPurple,
             textWeight: FontWeight.w800,
           ),
@@ -23,14 +25,14 @@ class LandingPageSecondLevel extends StatelessWidget {
           CustomText(
             text:
                 'Choose from our comprehensive range of car care services, all performed at',
-            textSize: 25,
+            textSize: isMobile ? 16 : 25,
             textColor: AppColors.textSecondary,
             textWeight: FontWeight.w500,
           ),
 
           CustomText(
             text: 'your location',
-            textSize: 25,
+            textSize: isMobile ? 16 : 25,
             textColor: AppColors.textSecondary,
             textWeight: FontWeight.w500,
           ),
@@ -56,7 +58,7 @@ class LandingPageSecondLevel extends StatelessWidget {
                 ),
                 customText: CustomText(
                   text: 'Basic Wash',
-                  textSize: 30,
+                  textSize: isMobile ? 24 : 30,
                   textColor: AppColors.primaryPurple,
                   textWeight: FontWeight.w700,
                 ),
@@ -80,7 +82,7 @@ class LandingPageSecondLevel extends StatelessWidget {
                 ),
                 customText: CustomText(
                   text: 'Premium Detail',
-                  textSize: 30,
+                  textSize: isMobile ? 24 : 30,
                   textColor: AppColors.primaryPurple,
                   textWeight: FontWeight.w700,
                 ),
@@ -103,7 +105,7 @@ class LandingPageSecondLevel extends StatelessWidget {
                 ),
                 customText: CustomText(
                   text: 'Full Service',
-                  textSize: 30,
+                  textSize: isMobile ? 24 : 30,
                   textColor: AppColors.primaryPurple,
                   textWeight: FontWeight.w700,
                 ),
@@ -125,13 +127,13 @@ class LandingPageSecondLevel extends StatelessWidget {
                 title: CustomText(
                   text: 'Water Conservation',
                   textColor: AppColors.black,
-                  textSize: 21,
+                  textSize: isMobile ? 18 : 21,
                   textWeight: FontWeight.bold,
                 ),
                 subTitle: CustomText(
                   text: 'Eco-friendly washing',
                   textColor: AppColors.textSecondary,
-                  textSize: 18,
+                  textSize: isMobile ? 14 : 18,
                   textWeight: FontWeight.normal,
                 ),
               ),
@@ -144,13 +146,13 @@ class LandingPageSecondLevel extends StatelessWidget {
                 title: CustomText(
                   text: 'Interior Protection',
                   textColor: AppColors.black,
-                  textSize: 21,
+                  textSize: isMobile ? 18 : 21,
                   textWeight: FontWeight.bold,
                 ),
                 subTitle: CustomText(
                   text: 'Advanced care methods',
                   textColor: AppColors.textSecondary,
-                  textSize: 18,
+                  textSize: isMobile ? 14 : 18,
                   textWeight: FontWeight.normal,
                 ),
               ),
@@ -163,13 +165,13 @@ class LandingPageSecondLevel extends StatelessWidget {
                 title: CustomText(
                   text: 'Quick Service',
                   textColor: AppColors.black,
-                  textSize: 21,
+                  textSize: isMobile ? 18 : 21,
                   textWeight: FontWeight.bold,
                 ),
                 subTitle: CustomText(
                   text: 'Efficient & thorough',
                   textColor: AppColors.textSecondary,
-                  textSize: 18,
+                  textSize: isMobile ? 14 : 18,
                   textWeight: FontWeight.normal,
                 ),
               ),
@@ -182,13 +184,13 @@ class LandingPageSecondLevel extends StatelessWidget {
                 title: CustomText(
                   text: 'All Vehicle Types',
                   textColor: AppColors.black,
-                  textSize: 21,
+                  textSize: isMobile ? 18 : 21,
                   textWeight: FontWeight.bold,
                 ),
                 subTitle: CustomText(
                   text: 'Cars, trucks, SUVs',
                   textColor: AppColors.textSecondary,
-                  textSize: 16,
+                  textSize: isMobile ? 14 : 16,
                   textWeight: FontWeight.normal,
                 ),
               ),

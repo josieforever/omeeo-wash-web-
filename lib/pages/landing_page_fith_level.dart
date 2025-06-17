@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:omeeoweb/widgets/colors.dart';
 import 'package:omeeoweb/widgets/cutsom_widgets.dart';
+import '../responsive.dart';
 
 class LandingPageFithLevel extends StatelessWidget {
   const LandingPageFithLevel({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(color: AppColors.primaryPurple),
@@ -16,7 +18,7 @@ class LandingPageFithLevel extends StatelessWidget {
           CustomText(
             text: 'omeeo wash',
             textColor: AppColors.white,
-            textSize: 22,
+            textSize: isMobile ? 18 : 22,
             textWeight: FontWeight.w500,
           ),
           const SizedBox(height: 20),
@@ -24,14 +26,14 @@ class LandingPageFithLevel extends StatelessWidget {
             text:
                 'Professional mobile car wash and detailing services delivered to your location',
             textColor: const Color.fromARGB(150, 255, 255, 255),
-            textSize: 21,
+            textSize: isMobile ? 16 : 21,
             textWeight: FontWeight.w500,
           ),
           const SizedBox(height: 20),
           CustomText(
             text: '© 2024 omeeo wash. All rights reserved.',
             textColor: const Color.fromARGB(80, 255, 255, 255),
-            textSize: 20,
+            textSize: isMobile ? 14 : 20,
             textWeight: FontWeight.w500,
           ),
           const SizedBox(height: 40),
