@@ -1,38 +1,143 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+<html lang="en">
+  <head>
+    <base href="$FLUTTER_BASE_HREF" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+    <title>omeeo Car Wash | Mobile & Onsite Car Detailing Ghana</title>
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    <!-- ✅ Essential SEO Tags -->
+    <meta
+      name="description"
+      content="omeeo Car Wash offers professional mobile car detailing and onsite car wash services in Ghana. Book a wash at your doorstep or visit our premium washing bay."
+    />
+    <meta
+      name="keywords"
+      content="Car Wash Ghana, Mobile Detailing Ghana, Onsite Car Wash, Car Cleaning Services, Car Detailing Near Me, omeeo Car Wash, Mobile Car Wash Accra"
+    />
+    <meta name="author" content="omeeo Car Wash" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://omeeo.org/" />
 
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
+    <!-- ✅ Open Graph (Facebook & others) -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="omeeo Car Wash | Mobile & Onsite Car Detailing in Ghana"
+    />
+    <meta
+      property="og:description"
+      content="Get your car washed at your location or visit our omeeo car wash bay. Premium mobile detailing and professional service."
+    />
+    <meta
+      property="og:image"
+      content="https://omeeo.org/icons/omeeo_wash_logo_white_stripes.png"
+    />
+    <meta property="og:url" content="https://omeeo.org/" />
+    <meta property="og:site_name" content="omeeo Car Wash" />
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    <!-- ✅ Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="omeeo Car Wash | Mobile & Onsite Car Detailing in Ghana"
+    />
+    <meta
+      name="twitter:description"
+      content="Book a mobile car wash or visit our car wash bay in Ghana. omeeo brings quality car detailing to your doorstep."
+    />
+    <meta
+      name="twitter:image"
+      content="https://omeeo.org/icons/omeeo_wash_logo_white_stripes.png"
+    />
 
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="omeeoweb">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- ✅ Mobile & PWA Meta -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="omeeo Car Wash" />
+    <meta name="theme-color" content="#ffffff" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    <!-- ✅ Icons -->
+    <link
+      rel="apple-touch-icon"
+      href="icons/omeeo_wash_logo_white_stripes.png"
+    />
+    <!-- <link
+      rel="icon"
+      type="image/png"
+      href="icons/omeeo_wash_logo_white_stripes.png"
+    /> -->
+    <link id="dynamic-favicon" rel="icon" type="image/png" href="" />
 
-  <title>omeeoweb</title>
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
-  <script src="flutter_bootstrap.js" async></script>
-</body>
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- ✅ Structured Data for Local SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CarService",
+        "name": "omeeo Car Wash",
+        "image": "https://omeeo.org/icons/omeeo_wash_logo_white_stripes.png",
+        "url": "https://omeeo.org/",
+        "telephone": "+233557112580",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Accra",
+          "addressRegion": "Greater Accra",
+          "addressCountry": "GH"
+        },
+        "openingHours": "Mo-Sa 08:00-18:00",
+        "priceRange": "$20"
+      }
+    </script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBmNwLu80LXj0-qPHdObSksWP9dtQ9nk5E",
+        authDomain: "omeeo-web.firebaseapp.com",
+        projectId: "omeeo-web",
+        storageBucket: "omeeo-web.firebasestorage.app",
+        messagingSenderId: "6745281857",
+        appId: "1:6745281857:web:c6c94932ecea5a60773dc0",
+        measurementId: "G-0LVPC0M4LT",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+  </head>
+
+  <body>
+    <script src="flutter_bootstrap.js" async></script>
+    <script>
+      function setFaviconBasedOnTheme() {
+        const favicon = document.getElementById("dynamic-favicon");
+        const isDarkMode =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        favicon.href = isDarkMode
+          ? "icons/omeeo_wash_logo_white_stripes.png"
+          : "icons/omeeo_wash_logo_black_stripes.png";
+      }
+
+      // Set on initial load
+      setFaviconBasedOnTheme();
+
+      // Optional: update if theme changes while browsing
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", setFaviconBasedOnTheme);
+    </script>
+  </body>
 </html>
