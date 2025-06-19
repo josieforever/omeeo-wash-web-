@@ -21,15 +21,9 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -60,6 +54,23 @@ class DefaultFirebaseOptions {
     authDomain: 'omeeo-web.firebaseapp.com',
     storageBucket: 'omeeo-web.firebasestorage.app',
     measurementId: 'G-V7WB228CYW',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBBgigsASVFH8nR0zhUnvGFjLUt-wjyyX8',
+    appId: '1:6745281857:ios:12917f52eff2c955773dc0',
+    messagingSenderId: '6745281857',
+    projectId: 'omeeo-web',
+    storageBucket: 'omeeo-web.firebasestorage.app',
+    iosBundleId: 'com.example.omeeoweb',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyAN1EEf9RLl5xOCfJcTNiF1Wi-iOiNEnVE',
+    appId: '1:6745281857:android:95ba8ead0a67a94c773dc0',
+    messagingSenderId: '6745281857',
+    projectId: 'omeeo-web',
+    storageBucket: 'omeeo-web.firebasestorage.app',
   );
 
 }
