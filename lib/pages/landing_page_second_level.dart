@@ -6,12 +6,14 @@ import 'package:omeeoweb/widgets/cutsom_widgets.dart';
 import '../responsive.dart';
 
 class LandingPageSecondLevel extends StatelessWidget {
-  const LandingPageSecondLevel({super.key});
+  final GlobalKey sectionKey2;
+  const LandingPageSecondLevel({super.key, required this.sectionKey2});
 
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     return Container(
+      key: sectionKey2,
       child: Column(
         children: [
           const SizedBox(height: 20),
@@ -28,6 +30,7 @@ class LandingPageSecondLevel extends StatelessWidget {
             textSize: isMobile ? 16 : 25,
             textColor: AppColors.textSecondary,
             textWeight: FontWeight.w500,
+            textAlign: TextAlign.center,
           ),
 
           CustomText(
@@ -117,6 +120,7 @@ class LandingPageSecondLevel extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           Wrap(
+            alignment: WrapAlignment.center,
             children: [
               PrincipleCard(
                 icon: Icon(

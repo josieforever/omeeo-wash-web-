@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "6745281857",
+    "project_id": "omeeo-web",
+    "storage_bucket": "omeeo-web.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6745281857:android:95ba8ead0a67a94c773dc0",
+        "android_client_info": {
+          "package_name": "com.example.omeeoweb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN1EEf9RLl5xOCfJcTNiF1Wi-iOiNEnVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

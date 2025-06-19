@@ -1,5 +1,4 @@
 import 'dart:ui' show ImageFilter;
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'
     show FontAwesomeIcons;
@@ -8,8 +7,42 @@ import 'package:omeeoweb/widgets/cutsom_widgets.dart'
     show CustomText, FeatureCard, RegularButton;
 import '../responsive.dart';
 
-class LandingPageFirstLevel extends StatelessWidget {
-  const LandingPageFirstLevel({super.key});
+class LandingPageFirstLevel extends StatefulWidget {
+  final GlobalKey sectionKey;
+  final GlobalKey sectionKey2;
+  const LandingPageFirstLevel({
+    super.key,
+    required this.sectionKey,
+    required this.sectionKey2,
+  });
+
+  @override
+  State<LandingPageFirstLevel> createState() => _LandingPageFirstLevelState();
+}
+
+class _LandingPageFirstLevelState extends State<LandingPageFirstLevel> {
+  final ScrollController _scrollController = ScrollController();
+
+  // Use this to scroll to a specific widget
+
+  void scrollToSection(GlobalKey key) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final context = key.currentContext;
+      if (context != null) {
+        Scrollable.ensureVisible(
+          context,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +88,7 @@ class LandingPageFirstLevel extends StatelessWidget {
               SizedBox(height: 20),
               // Logo
               SizedBox(
-                width: 350, // adjust size as needed
+                width: isMobile ? 200 : 350, // adjust size as needed
 
                 child: Image.asset(
                   'assets/images/omeeo_wash_logo_black_stripes.png', // fixed path
@@ -69,6 +102,7 @@ class LandingPageFirstLevel extends StatelessWidget {
                 textSize: isMobile ? 40 : 80,
                 textColor: AppColors.primaryPurple,
                 textWeight: FontWeight.w800,
+                textAlign: TextAlign.center,
               ),
 
               SizedBox(height: 20),
@@ -102,12 +136,15 @@ class LandingPageFirstLevel extends StatelessWidget {
                       textWeight: FontWeight.w600,
                       textColor: AppColors.background,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      scrollToSection(widget.sectionKey);
+                    },
                     backgroundColor: AppColors.primaryPurple,
                     border: Border.all(color: AppColors.primaryPurple),
                     padding: EdgeInsets.symmetric(
-                        vertical: isMobile ? 12 : 15,
-                        horizontal: isMobile ? 20 : 40),
+                      vertical: isMobile ? 12 : 15,
+                      horizontal: isMobile ? 20 : 40,
+                    ),
                     borderRadius: 10,
                   ),
                   SizedBox(width: 20),
@@ -118,13 +155,16 @@ class LandingPageFirstLevel extends StatelessWidget {
                       textWeight: FontWeight.w600,
                       textColor: AppColors.primaryPurple,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      scrollToSection(widget.sectionKey2);
+                    },
                     backgroundColor: Colors.white,
 
                     border: Border.all(color: AppColors.primaryPurple),
                     padding: EdgeInsets.symmetric(
-                        vertical: isMobile ? 12 : 15,
-                        horizontal: isMobile ? 20 : 30),
+                      vertical: isMobile ? 12 : 15,
+                      horizontal: isMobile ? 20 : 30,
+                    ),
                     borderRadius: 10,
                   ),
                 ],
@@ -144,17 +184,17 @@ class LandingPageFirstLevel extends StatelessWidget {
                       size: 30,
                       color: Colors.black,
                     ),
-                  title: CustomText(
-                    text: 'Mobile Service',
-                    textColor: AppColors.black,
-                    textSize: isMobile ? 24 : 30,
-                    textWeight: FontWeight.bold,
-                  ),
-                  subtitle: CustomText(
-                    text: 'We come to your home or office',
-                    textColor: AppColors.textSecondary,
-                    textAlign: TextAlign.center,
-                    textSize: isMobile ? 16 : 20,
+                    title: CustomText(
+                      text: 'Mobile Service',
+                      textColor: AppColors.black,
+                      textSize: isMobile ? 24 : 30,
+                      textWeight: FontWeight.bold,
+                    ),
+                    subtitle: CustomText(
+                      text: 'We come to your home or office',
+                      textColor: AppColors.textSecondary,
+                      textAlign: TextAlign.center,
+                      textSize: isMobile ? 16 : 20,
                     ),
                     iconColor: AppColors.primaryPurple,
                   ),
@@ -164,17 +204,17 @@ class LandingPageFirstLevel extends StatelessWidget {
                       size: 30,
                       color: Colors.black,
                     ),
-                  title: CustomText(
-                    text: 'Eco-Friendly',
-                    textColor: AppColors.black,
-                    textSize: isMobile ? 24 : 30,
-                    textWeight: FontWeight.bold,
-                  ),
-                  subtitle: CustomText(
-                    text: 'Biodegradable products & water conservation',
-                    textAlign: TextAlign.center,
-                    textColor: AppColors.textSecondary,
-                    textSize: isMobile ? 16 : 20,
+                    title: CustomText(
+                      text: 'Eco-Friendly',
+                      textColor: AppColors.black,
+                      textSize: isMobile ? 24 : 30,
+                      textWeight: FontWeight.bold,
+                    ),
+                    subtitle: CustomText(
+                      text: 'Biodegradable products & water conservation',
+                      textAlign: TextAlign.center,
+                      textColor: AppColors.textSecondary,
+                      textSize: isMobile ? 16 : 20,
                     ),
                     iconColor: AppColors.primaryPurple,
                   ),
@@ -184,17 +224,17 @@ class LandingPageFirstLevel extends StatelessWidget {
                       size: 30,
                       color: Colors.black,
                     ),
-                  title: CustomText(
-                    text: 'Professional',
-                    textColor: AppColors.black,
-                    textSize: isMobile ? 24 : 30,
-                    textWeight: FontWeight.bold,
-                  ),
-                  subtitle: CustomText(
-                    text: 'Trained technicians & premium equipment',
-                    textAlign: TextAlign.center,
-                    textColor: AppColors.textSecondary,
-                    textSize: isMobile ? 16 : 20,
+                    title: CustomText(
+                      text: 'Professional',
+                      textColor: AppColors.black,
+                      textSize: isMobile ? 24 : 30,
+                      textWeight: FontWeight.bold,
+                    ),
+                    subtitle: CustomText(
+                      text: 'Trained technicians & premium equipment',
+                      textAlign: TextAlign.center,
+                      textColor: AppColors.textSecondary,
+                      textSize: isMobile ? 16 : 20,
                     ),
                     iconColor: AppColors.primaryPurple,
                   ),
