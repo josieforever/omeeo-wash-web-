@@ -23,21 +23,6 @@ class LandingPageFirstLevel extends StatefulWidget {
 class _LandingPageFirstLevelState extends State<LandingPageFirstLevel> {
   final ScrollController _scrollController = ScrollController();
 
-  // Use this to scroll to a specific widget
-
-  void scrollToSection(GlobalKey key) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final context = key.currentContext;
-      if (context != null) {
-        Scrollable.ensureVisible(
-          context,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-      }
-    });
-  }
-
   @override
   void dispose() {
     _scrollController.dispose();
@@ -137,7 +122,11 @@ class _LandingPageFirstLevelState extends State<LandingPageFirstLevel> {
                       textColor: AppColors.background,
                     ),
                     onPressed: () {
-                      scrollToSection(widget.sectionKey);
+                      // scrollToSection(widget.sectionKey);
+                      Scrollable.ensureVisible(
+                        widget.sectionKey.currentContext!,
+                        duration: Duration(microseconds: 500),
+                      );
                     },
                     backgroundColor: AppColors.primaryPurple,
                     border: Border.all(color: AppColors.primaryPurple),
@@ -156,7 +145,11 @@ class _LandingPageFirstLevelState extends State<LandingPageFirstLevel> {
                       textColor: AppColors.primaryPurple,
                     ),
                     onPressed: () {
-                      scrollToSection(widget.sectionKey2);
+                      // scrollToSection(widget.sectionKey2);
+                      Scrollable.ensureVisible(
+                        widget.sectionKey2.currentContext!,
+                        duration: Duration(microseconds: 500),
+                      );
                     },
                     backgroundColor: Colors.white,
 

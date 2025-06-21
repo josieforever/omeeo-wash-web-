@@ -67,7 +67,7 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/animations/omeeo_svg.json
+    - assets/animations/omeeo_wash_black_stripes.json
 
   fonts:
     - family: Poppins
@@ -83,12 +83,14 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/logo.png" # fallback for older Android & iOS
   adaptive_icon_foreground: "assets/logo.png" # your logo with transparent background
-  adaptive_icon_background: "#000000"
+  adaptive_icon_background: "#FFFFFF"
+  #flutter pub run flutter_launcher_icons:main
 
 flutter_native_splash:
   color: "#000000"
-  image: assets/images/omeeo_wash_logo_white_stripes_native_splash_screen_2.png
+  image: assets/images/omeeo_wash_black_stripes.png
   android_12:
-    color: "#000000"
-    image: assets/images/omeeo_wash_logo_white_stripes_native_splash_screen_2.png
-    icon_background_color: "#000000"
+    color: "#FFFFFF"
+    image: assets/images/omeeo_wash_black_stripes.png
+    icon_background_color: "#FFFFFF"
+    #flutter pub run flutter_native_splash:create
