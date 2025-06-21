@@ -25,10 +25,10 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       body: Center(
         child: Lottie.asset(
-          'assets/animations/omeeo_svg.json',
+          'assets/animations/omeeo_wash_black_stripes.json',
           width: 250,
           height: 250,
           fit: BoxFit.contain,
