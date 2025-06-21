@@ -1,22 +1,42 @@
 import 'dart:ui' show ImageFilter;
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'
     show FontAwesomeIcons;
 import 'package:omeeoweb/widgets/colors.dart';
 import 'package:omeeoweb/widgets/cutsom_widgets.dart'
     show CustomText, FeatureCard, RegularButton;
+import '../responsive.dart';
 
-class LandingPageFirstLevel extends StatelessWidget {
-  const LandingPageFirstLevel({super.key});
+class LandingPageFirstLevel extends StatefulWidget {
+  final GlobalKey sectionKey;
+  final GlobalKey sectionKey2;
+  const LandingPageFirstLevel({
+    super.key,
+    required this.sectionKey,
+    required this.sectionKey2,
+  });
+
+  @override
+  State<LandingPageFirstLevel> createState() => _LandingPageFirstLevelState();
+}
+
+class _LandingPageFirstLevelState extends State<LandingPageFirstLevel> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
     return Stack(
       children: [
         Container(
           width: double.infinity,
-          height: 1000,
+          height: isMobile ? 700 : 1000,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/HowOftenWashCar_Header.jpg'),
@@ -30,7 +50,7 @@ class LandingPageFirstLevel extends StatelessWidget {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), // blur intensity
             child: Container(
-              height: 1007, // optional tint
+              height: isMobile ? 707 : 1007, // optional tint
             ),
           ),
         ),
@@ -38,7 +58,7 @@ class LandingPageFirstLevel extends StatelessWidget {
         // White overlay with opacity
         Container(
           width: double.infinity,
-          height: 1007,
+          height: isMobile ? 707 : 1007,
           color: const Color.fromARGB(
             212,
             246,
@@ -53,7 +73,7 @@ class LandingPageFirstLevel extends StatelessWidget {
               SizedBox(height: 20),
               // Logo
               SizedBox(
-                width: 350, // adjust size as needed
+                width: isMobile ? 200 : 350, // adjust size as needed
 
                 child: Image.asset(
                   'assets/images/omeeo_wash_logo_black_stripes.png', // fixed path
@@ -64,9 +84,10 @@ class LandingPageFirstLevel extends StatelessWidget {
               // Subtitle
               CustomText(
                 text: 'Premium Mobile Car Care',
-                textSize: 80,
+                textSize: isMobile ? 40 : 80,
                 textColor: AppColors.primaryPurple,
                 textWeight: FontWeight.w800,
+                textAlign: TextAlign.center,
               ),
 
               SizedBox(height: 20),
@@ -76,14 +97,14 @@ class LandingPageFirstLevel extends StatelessWidget {
                 text:
                     'Professional mobile car wash and detailing services. We bring the car',
                 textAlign: TextAlign.center,
-                textSize: 25,
+                textSize: isMobile ? 16 : 25,
                 textColor: AppColors.textSecondary,
               ),
               CustomText(
                 text:
                     'Wash to your location with eco-friendly products and premium care.',
                 textAlign: TextAlign.center,
-                textSize: 25,
+                textSize: isMobile ? 16 : 25,
                 textColor: AppColors.textSecondary,
               ),
 
@@ -96,29 +117,47 @@ class LandingPageFirstLevel extends StatelessWidget {
                   RegularButton(
                     textWidget: CustomText(
                       text: 'Book Now',
-                      textSize: 20,
+                      textSize: isMobile ? 16 : 20,
                       textWeight: FontWeight.w600,
                       textColor: AppColors.background,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // scrollToSection(widget.sectionKey);
+                      Scrollable.ensureVisible(
+                        widget.sectionKey.currentContext!,
+                        duration: Duration(microseconds: 500),
+                      );
+                    },
                     backgroundColor: AppColors.primaryPurple,
                     border: Border.all(color: AppColors.primaryPurple),
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+                    padding: EdgeInsets.symmetric(
+                      vertical: isMobile ? 12 : 15,
+                      horizontal: isMobile ? 20 : 40,
+                    ),
                     borderRadius: 10,
                   ),
                   SizedBox(width: 20),
                   RegularButton(
                     textWidget: CustomText(
                       text: 'View Services',
-                      textSize: 20,
+                      textSize: isMobile ? 16 : 20,
                       textWeight: FontWeight.w600,
                       textColor: AppColors.primaryPurple,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      // scrollToSection(widget.sectionKey2);
+                      Scrollable.ensureVisible(
+                        widget.sectionKey2.currentContext!,
+                        duration: Duration(microseconds: 500),
+                      );
+                    },
                     backgroundColor: Colors.white,
 
                     border: Border.all(color: AppColors.primaryPurple),
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                    padding: EdgeInsets.symmetric(
+                      vertical: isMobile ? 12 : 15,
+                      horizontal: isMobile ? 20 : 30,
+                    ),
                     borderRadius: 10,
                   ),
                 ],
@@ -141,14 +180,14 @@ class LandingPageFirstLevel extends StatelessWidget {
                     title: CustomText(
                       text: 'Mobile Service',
                       textColor: AppColors.black,
-                      textSize: 30,
+                      textSize: isMobile ? 24 : 30,
                       textWeight: FontWeight.bold,
                     ),
                     subtitle: CustomText(
                       text: 'We come to your home or office',
                       textColor: AppColors.textSecondary,
                       textAlign: TextAlign.center,
-                      textSize: 20,
+                      textSize: isMobile ? 16 : 20,
                     ),
                     iconColor: AppColors.primaryPurple,
                   ),
@@ -161,14 +200,14 @@ class LandingPageFirstLevel extends StatelessWidget {
                     title: CustomText(
                       text: 'Eco-Friendly',
                       textColor: AppColors.black,
-                      textSize: 30,
+                      textSize: isMobile ? 24 : 30,
                       textWeight: FontWeight.bold,
                     ),
                     subtitle: CustomText(
                       text: 'Biodegradable products & water conservation',
                       textAlign: TextAlign.center,
                       textColor: AppColors.textSecondary,
-                      textSize: 20,
+                      textSize: isMobile ? 16 : 20,
                     ),
                     iconColor: AppColors.primaryPurple,
                   ),
@@ -181,14 +220,14 @@ class LandingPageFirstLevel extends StatelessWidget {
                     title: CustomText(
                       text: 'Professional',
                       textColor: AppColors.black,
-                      textSize: 30,
+                      textSize: isMobile ? 24 : 30,
                       textWeight: FontWeight.bold,
                     ),
                     subtitle: CustomText(
                       text: 'Trained technicians & premium equipment',
                       textAlign: TextAlign.center,
                       textColor: AppColors.textSecondary,
-                      textSize: 20,
+                      textSize: isMobile ? 16 : 20,
                     ),
                     iconColor: AppColors.primaryPurple,
                   ),

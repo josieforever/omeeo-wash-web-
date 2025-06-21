@@ -1,45 +1,74 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:omeeoweb/widgets/colors.dart';
 import 'package:omeeoweb/widgets/cutsom_widgets.dart';
+import '../responsive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LandingPageFourthLevel extends StatelessWidget {
   const LandingPageFourthLevel({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.accentPurple,
-      child: Column(
-        children: [
-          const SizedBox(height: 60),
-          CustomText(
-            text: 'Ready to Book with OMEEO wash?',
-            textColor: AppColors.primaryPurple,
-            textSize: 65,
-            textWeight: FontWeight.w800,
-            textAlign: TextAlign.center,
-          ),
-
-          CustomText(
-            text:
-                'Get in touch with us today to schedule your mobile car wash and detailing service',
-            textColor: Colors.black54,
-            textSize: 25,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 20),
-          Row(
+    final isMobile = Responsive.isMobile(context);
+    return isMobile
+        ? Container(
+          color: AppColors.accentPurple,
+          child: Column(
             children: [
-              Expanded(child: ContactCard()),
-              Expanded(child: QuoteForm()),
+              const SizedBox(height: 60),
+              CustomText(
+                text: 'Ready to Book with OMEEO wash?',
+                textColor: AppColors.primaryPurple,
+                textSize: isMobile ? 40 : 65,
+                textWeight: FontWeight.w800,
+                textAlign: TextAlign.center,
+              ),
+
+              CustomText(
+                text:
+                    'Get in touch with us today to schedule your mobile car wash and detailing service',
+                textColor: Colors.black54,
+                textSize: isMobile ? 16 : 25,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              ContactCard(),
+              QuoteForm(),
             ],
           ),
-        ],
-      ),
-    );
+        )
+        : Container(
+          color: AppColors.accentPurple,
+          child: Column(
+            children: [
+              const SizedBox(height: 60),
+              CustomText(
+                text: 'Ready to Book with OMEEO wash?',
+                textColor: AppColors.primaryPurple,
+                textSize: isMobile ? 40 : 65,
+                textWeight: FontWeight.w800,
+                textAlign: TextAlign.center,
+              ),
+
+              CustomText(
+                text:
+                    'Get in touch with us today to schedule your mobile car wash and detailing service',
+                textColor: Colors.black54,
+                textSize: isMobile ? 16 : 25,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(child: ContactCard()),
+                  Expanded(child: QuoteForm()),
+                ],
+              ),
+            ],
+          ),
+        );
   }
 }
 
@@ -48,6 +77,7 @@ class ContactCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
     return Card(
       color: AppColors.white,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -78,8 +108,14 @@ class ContactCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            const Text('(+233) 557-112580 ', style: TextStyle(fontSize: 20)),
-            const Text('(+233) 591-553347', style: TextStyle(fontSize: 20)),
+            Text(
+              '(+233) 557-112580 ',
+              style: TextStyle(fontSize: isMobile ? 16 : 20),
+            ),
+            Text(
+              '(+233) 591-553347',
+              style: TextStyle(fontSize: isMobile ? 16 : 20),
+            ),
             const SizedBox(height: 16),
 
             Text(
@@ -119,17 +155,17 @@ class ContactCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            const Text(
+            Text(
               'Monday - Friday: 8:00 AM - 6:00 PM',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: isMobile ? 16 : 20),
             ),
-            const Text(
+            Text(
               'Saturday: 8:00 AM - 5:00 PM',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: isMobile ? 16 : 20),
             ),
-            const Text(
+            Text(
               'Sunday: 8:00 AM - 5:00 PM',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: isMobile ? 16 : 20),
             ),
             const SizedBox(height: 20),
 
@@ -137,7 +173,7 @@ class ContactCard extends StatelessWidget {
               text: CustomText(
                 text: 'Call Now to Book',
                 textColor: AppColors.white,
-                textSize: 20,
+                textSize: isMobile ? 16 : 20,
                 textWeight: FontWeight.w600,
               ),
               onPressed: () {},
@@ -158,6 +194,31 @@ class QuoteForm extends StatefulWidget {
 }
 
 class _QuoteFormState extends State<QuoteForm> {
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedData();
+  }
+
+  Future<void> _loadSavedData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      firstNameController.text = prefs.getString('firstName') ?? '';
+      lastNameController.text = prefs.getString('lastName') ?? '';
+      phoneController.text = prefs.getString('phone') ?? '';
+      emailController.text = prefs.getString('email') ?? '';
+      addressController.text = prefs.getString('address') ?? '';
+      vehicleMakeController.text = prefs.getString('vehicleMake') ?? '';
+      vehicleModelController.text = prefs.getString('vehicleModel') ?? '';
+      serviceRequestController.text = prefs.getString('serviceRequest') ?? '';
+    });
+  }
+
+  void _saveField(String key, String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, value);
+  }
+
   // 👇 TextEditingControllers
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
@@ -185,9 +246,13 @@ class _QuoteFormState extends State<QuoteForm> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
     return Card(
       color: AppColors.white,
-      margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 20),
+      margin: EdgeInsets.symmetric(
+        vertical: isMobile ? 30 : 70,
+        horizontal: 20,
+      ),
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
@@ -199,7 +264,7 @@ class _QuoteFormState extends State<QuoteForm> {
             CustomText(
               text: 'Request a Quote',
               textColor: AppColors.primaryPurple,
-              textSize: 30,
+              textSize: isMobile ? 24 : 30,
               textWeight: FontWeight.w600,
             ),
             const SizedBox(height: 20),
@@ -209,6 +274,7 @@ class _QuoteFormState extends State<QuoteForm> {
               children: [
                 Expanded(
                   child: TextField(
+                    onChanged: (value) => _saveField('firstName', value),
                     controller: firstNameController,
                     decoration: _inputDecoration('First Name'),
                   ),
@@ -216,6 +282,7 @@ class _QuoteFormState extends State<QuoteForm> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: TextField(
+                    onChanged: (value) => _saveField('firstName', value),
                     controller: lastNameController,
                     decoration: _inputDecoration('Last Name'),
                   ),
@@ -226,6 +293,7 @@ class _QuoteFormState extends State<QuoteForm> {
 
             // Phone
             TextField(
+              onChanged: (value) => _saveField('firstName', value),
               controller: phoneController,
               decoration: _inputDecoration('Phone Number'),
             ),
@@ -233,6 +301,7 @@ class _QuoteFormState extends State<QuoteForm> {
 
             // Email
             TextField(
+              onChanged: (value) => _saveField('firstName', value),
               controller: emailController,
               decoration: _inputDecoration('Email Address'),
             ),
@@ -240,6 +309,7 @@ class _QuoteFormState extends State<QuoteForm> {
 
             // Address
             TextField(
+              onChanged: (value) => _saveField('firstName', value),
               controller: addressController,
               decoration: _inputDecoration('Address for Service'),
             ),
@@ -250,6 +320,7 @@ class _QuoteFormState extends State<QuoteForm> {
               children: [
                 Expanded(
                   child: TextField(
+                    onChanged: (value) => _saveField('firstName', value),
                     controller: vehicleMakeController,
                     decoration: _inputDecoration('Vehicle Make'),
                   ),
@@ -257,6 +328,7 @@ class _QuoteFormState extends State<QuoteForm> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: TextField(
+                    onChanged: (value) => _saveField('firstName', value),
                     controller: vehicleModelController,
                     decoration: _inputDecoration('Vehicle Model'),
                   ),
@@ -267,6 +339,7 @@ class _QuoteFormState extends State<QuoteForm> {
 
             // Service Request
             TextField(
+              onChanged: (value) => _saveField('firstName', value),
               controller: serviceRequestController,
               maxLines: 5,
               minLines: 3,
@@ -282,7 +355,7 @@ class _QuoteFormState extends State<QuoteForm> {
                   text: CustomText(
                     text: 'Request Quote',
                     textColor: AppColors.white,
-                    textSize: 20,
+                    textSize: isMobile ? 16 : 20,
                     textWeight: FontWeight.w600,
                   ),
                   onPressed: () async {
@@ -292,18 +365,14 @@ class _QuoteFormState extends State<QuoteForm> {
 
                     sendQuoteEmail(
                       context: context,
-                      name:
-                          '${firstNameController.text} ${lastNameController.text}',
-                      title: 'Quote Request from ${firstNameController.text}',
-                      email: emailController.text,
-                      message: '''
-Phone: ${phoneController.text}
-Address: ${addressController.text}
-Vehicle: ${vehicleMakeController.text} ${vehicleModelController.text}
-
-Request:
-${serviceRequestController.text}
-''',
+                      firstNameController: firstNameController,
+                      lastNameController: lastNameController,
+                      phoneController: phoneController,
+                      emailController: emailController,
+                      addressController: addressController,
+                      vehicleMakeController: vehicleMakeController,
+                      vehicleModelController: vehicleModelController,
+                      serviceRequestController: serviceRequestController,
                     ).then(
                       (response) => {
                         setState(() {
@@ -340,25 +409,83 @@ ${serviceRequestController.text}
   }
 }
 
+Future<void> saveQuoteFormData({
+  required String firstName,
+  required String lastName,
+  required String phone,
+  required String email,
+  required String address,
+  required String vehicleMake,
+  required String vehicleModel,
+  required String serviceRequest,
+}) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString('quote_firstName', firstName);
+  await prefs.setString('quote_lastName', lastName);
+  await prefs.setString('quote_phone', phone);
+  await prefs.setString('quote_email', email);
+  await prefs.setString('quote_address', address);
+  await prefs.setString('quote_vehicleMake', vehicleMake);
+  await prefs.setString('quote_vehicleModel', vehicleModel);
+  await prefs.setString('quote_serviceRequest', serviceRequest);
+}
+
+Future<Map<String, String>> loadQuoteFormData() async {
+  final prefs = await SharedPreferences.getInstance();
+  return {
+    'firstName': prefs.getString('quote_firstName') ?? '',
+    'lastName': prefs.getString('quote_lastName') ?? '',
+    'phone': prefs.getString('quote_phone') ?? '',
+    'email': prefs.getString('quote_email') ?? '',
+    'address': prefs.getString('quote_address') ?? '',
+    'vehicleMake': prefs.getString('quote_vehicleMake') ?? '',
+    'vehicleModel': prefs.getString('quote_vehicleModel') ?? '',
+    'serviceRequest': prefs.getString('quote_serviceRequest') ?? '',
+  };
+}
+
 Future<int> sendQuoteEmail({
   required BuildContext context,
-  required String name,
-  required String title,
-  required String email,
-  required String message,
+  required TextEditingController firstNameController,
+  required TextEditingController lastNameController,
+  required TextEditingController phoneController,
+  required TextEditingController emailController,
+  required TextEditingController addressController,
+  required TextEditingController vehicleMakeController,
+  required TextEditingController vehicleModelController,
+  required TextEditingController serviceRequestController,
 }) async {
-  if (name.isEmpty || title.isEmpty || email.isEmpty || message.isEmpty) {
+  final name = '${firstNameController.text} ${lastNameController.text}';
+  final title = 'Quote Request from ${firstNameController.text}';
+  final email = emailController.text;
+  final message = '''
+Phone: ${phoneController.text}
+Address: ${addressController.text}
+Vehicle: ${vehicleMakeController.text} ${vehicleModelController.text}
+
+Request:
+${serviceRequestController.text}
+''';
+
+  if (firstNameController.text.isEmpty ||
+      lastNameController.text.isEmpty ||
+      phoneController.text.isEmpty ||
+      email.isEmpty ||
+      addressController.text.isEmpty ||
+      vehicleMakeController.text.isEmpty ||
+      vehicleModelController.text.isEmpty ||
+      serviceRequestController.text.isEmpty) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Center(
           child: CustomText(
             text: 'Please complete the form.',
-            textSize: 20,
+            textSize: Responsive.isMobile(context) ? 16 : 20,
             textColor: AppColors.white,
           ),
         ),
         backgroundColor: Colors.red,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
     return 0;
@@ -387,38 +514,47 @@ Future<int> sendQuoteEmail({
   );
 
   if (response.statusCode == 200) {
+    await saveQuoteFormData(
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      phone: phoneController.text,
+      email: email,
+      address: addressController.text,
+      vehicleMake: vehicleMakeController.text,
+      vehicleModel: vehicleModelController.text,
+      serviceRequest: serviceRequestController.text,
+    );
+
     debugPrint('✅ Email sent successfully!');
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         content: Center(
           child: CustomText(
             text: 'Message sent successfully!',
-            textSize: 20,
+            textSize: Responsive.isMobile(context) ? 16 : 20,
             textColor: AppColors.white,
           ),
         ),
         backgroundColor: Colors.green,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
     return response.statusCode;
   } else {
     debugPrint('❌ Failed to send email: ${response.body}');
-    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         content: Center(
           child: CustomText(
             text: 'Failed to send message. Please try again.',
-            textSize: 20,
+            textSize: Responsive.isMobile(context) ? 16 : 20,
             textColor: AppColors.white,
           ),
         ),
         backgroundColor: Colors.red,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
-
     return response.statusCode;
   }
 }

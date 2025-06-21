@@ -6,6 +6,7 @@ import 'package:omeeoweb/pages/landing_page_fourth_level.dart';
 import 'package:omeeoweb/pages/landing_page_second_level.dart';
 import 'package:omeeoweb/pages/landing_page_first_level.dart';
 import 'package:omeeoweb/pages/landing_page_third_level.dart';
+import 'package:omeeoweb/splashscreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,13 +31,16 @@ class OmeeoWashApp extends StatelessWidget {
           labelLarge: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final GlobalKey sectionKey = GlobalKey();
+  final GlobalKey sectionKey2 = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +51,14 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              LandingPageFirstLevel(),
-              LandingPageSecondLevel(),
+              LandingPageFirstLevel(
+                sectionKey: sectionKey,
+                sectionKey2: sectionKey2,
+              ),
+              LandingPageSecondLevel(sectionKey2: sectionKey2),
               LandingPageThirdLevel(),
               LandingPageFourthLevel(),
-              LandingPageFithLevel(),
+              LandingPageFithLevel(sectionKey: sectionKey),
             ],
           ),
         ),
